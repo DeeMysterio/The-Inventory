@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<section>
+  <div class="row">
+    <a href="{{ url_for('locations.new_location') }}" class="btn btn-primary btn-md active mb-4" role="button"
+      aria-pressed="true">Add New Location</a><br>
+    <table class="table table-hover table-bordered text-center">
+      <tr class="text-center">
+        <th>Id.</th>
+        <th>Location</th>
+        <th>Address</th>
+      </tr>
+      {% for location in locations.items %}
+      <tr>
+        <td>{{ location.location_id }}</td>
+        <td>
+          <a href="{{ url_for('locations.location', location_id = location.location_id)}}">{{ location.name }}</a>
+        </td>
+        <td>{{ location.address }}</td>
+
+      </tr>
+
+      {% endfor %}
+
+    </table>
+
+  </div>
+</section>
+{% for page_num in locations.iter_pages(left_edge = 1, right_edge=1, left_current=1, right_current=2) %}
+{% if page_num %}
+{% if locations.page == page_num %}
+<a class="btn btn-info mb-4" href="{{ url_for('locations.list_locations', page=page_num )}}">{{ page_num }}</a>
+{% else %}
+<a class="btn btn-outline-info mb-4" href="{{ url_for('locations.list_locations', page=page_num )}}">{{ page_num }}</a>
+{% endif %}
+{% else %}
+...
+{% endif %}
+{% endfor %}
+
+{% endblock content %}

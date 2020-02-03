@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+<article class="media content-section">
+
+    <div class="media-body">
+        <div class="article-metadata">
+            {% if movement.creator == current_user %}
+            <p>Added by: <a class="mr-2" href="{{ url_for('users.account') }}">You</a></p>
+            <span class="pull-right">
+                <a href="{{ url_for('movements.update_movement', movement_id=movement.movement_id) }}"
+                    data-balloon="edit this movement" class="text-info">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="#" data-balloon="remove this movement" class="text-danger" data-toggle="modal"
+                    data-target="#deleteModal">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </span>
+            {% else %}
+            <p>Added by: {{ movement.creator }}</p>
+            {% endif %}
+        </div>
+        <h3 class="article-title">{{ legend }}</h3>
+
+        <p class="article-content"><strong>Movement Id: </strong>{{ movement.movement_id }}</p>
+        <p class="article-content"><strong>Date: </strong>{{ movement.timestamp.strftime('%d-%m-%Y %H:%M:%S') }}</p>
+        <p class="article-content"><strong>From Location: </strong>{{ movement.from_location }}</p>
+        <p class="article-content"><strong>To Location: </strong>{{ movement.to_location }}</p>
+        <p class="article-content"><strong>Product: </strong>{{ movement.product }}</p>
+        <p class="article-content"><strong>Quantity: </strong>{{ movement.qty }}</p>
+    </div>
+</article>
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Movement?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="{{ url_for('movements.delete_movement', movement_id=movement.movement_id) }}"
+                    method="POST">
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
