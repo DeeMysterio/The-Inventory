@@ -2,16 +2,36 @@
 
 **The project as been developed to track real time movement of products from one warehouse to other.**
 
-## Getting Started
-**The technolgies needed to run the project have been listed in the requirements.txt file. You could install them all with following command:**
->pip install -r requirements.txt
+
 
 ### Prerequisites
-**In order to create the database, start the python interpreter in your virtual environment where you want to place the project with the command `$python` and run the following commads:**
->from inventory import db
+pip 3
 
->db.create_all()
+## Getting Started
+Follow the bellow steps to get this project running in your machine:
+1. Install pip first
+>sudo apt-get install python3-pip
 
-The above commands will import the database instance from the app inventory and then it creates the database structure for you.
+2. Then install virtualenv using pip3
+>sudo pip3 install virtualenv 
+
+3. Create a virtual environment with python3:('venv' below is the name of your vm)
+>virtualenv -p python3.7 venv
+
+4. change the directory to go into newly created vm and activate it:
+>cd venv
+
+>source venv/bin/activate
+
+5.Download the project inside this directory and change the directory to go inside it where you'll find the requirements.txt file.
+>cd The-Inventory-master
+
+6.Install the packages required:
+>pip install -r requirements.txt
+
+7.Finally, run the file run.py
+>python run.py
+
+Now you can access the site at the link mentioned on the terminal.
 
 **The project also includes a directory named 'screenshots' that has all the screenshots of the product in working state.**
