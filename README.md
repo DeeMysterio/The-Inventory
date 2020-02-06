@@ -23,15 +23,17 @@ Follow the bellow steps to get this project running in your machine:
 
 >source venv/bin/activate
 
-5.Download the project inside this directory and change the directory to go inside it where you'll find the requirements.txt file.
+5. Download the project inside this directory and change the directory to go inside it where you'll find the requirements.txt file.
 >cd The-Inventory-master
 
-6.Install the packages required:
+6. Install the packages required:
 >pip install -r requirements.txt
 
-7.Finally, run the file run.py
+7. Finally, run the file run.py
 >python run.py
 
 Now you can access the site at the link mentioned on the terminal.
+
+* Replace the `MAIL_USERNAME` and `MAIL_PASSWORD` values in the `config.py` with your own credentials to get the 'forgot password' feature working. `MAIL_USERNAME` could be your gmail address and `MAIL_PASSWORD` is the password linked to that address. *
 
 **The project also includes a directory named 'screenshots' that has all the screenshots of the product in working state.**
