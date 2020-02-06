@@ -43,7 +43,6 @@ def new_movement():
         elif from_location or to_location:
             if from_location and from_location.get_product_quantity(product.name)>= qty:
                 for _ in range(qty):
-                    # product = db.session.query(Product).filter(Product.name==product.name, Product.warehouse==from_location).first()
                     product.warehouse = None
                     db.session.commit()
                 flash_msg = 'The products have been successfully removed!'
