@@ -51,7 +51,7 @@ class Product(db.Model):
         if self.warehouse:
             warehouse = self.warehouse
             qty = warehouse.get_product_quantity(product_name)
-            return "{0}:{1}{2}".format(product_name, warehouse, qty)
+            return "{0}:{1}-{2}".format(product_name, warehouse, qty)
         return product_name
 
 
@@ -64,8 +64,8 @@ class Location(db.Model):
 
 
     def __repr__(self):
-        return "{0}({1})".format(self.name, self.get_total_stock())
-
+        return self.name
+        
     def get_product_quantity(self, product_name):   
         qty = 0
         for product in self.products:
@@ -73,6 +73,7 @@ class Location(db.Model):
                 qty+=1
         return qty
 
+    @property
     def get_total_stock(self):
         return len(self.products)
     
@@ -85,7 +86,7 @@ class Movement(db.Model):
     from_location = db.relationship(Location, lazy='joined', foreign_keys=[from_location_id], backref='from_location')
     to_location = db.relationship(Location, lazy='joined', foreign_keys=[to_location_id], backref='to_location')
     product_id = db.Column(db.Integer, db.ForeignKey('product.product_id'))
-    qty = db.Column(db.Integer)
+    qty = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 

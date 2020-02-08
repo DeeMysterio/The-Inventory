@@ -37,14 +37,15 @@ def new_movement():
                     products_transferred+=1
                     item.warehouse = to_location
                     db.session.add(item)
-                    db.session.commit()
+            db.session.commit()
             flash_msg = 'The products have been successfully shifted'
 
         elif from_location or to_location:
             if from_location and from_location.get_product_quantity(product.name)>= qty:
-                for _ in range(qty):
+                products = db.session.query(Product).filter(Product.warehouse==from_location).all()
+                for product in products:
                     product.warehouse = None
-                    db.session.commit()
+                db.session.commit()
                 flash_msg = 'The products have been successfully removed!'
             elif to_location:
                 products_to_add = []
@@ -57,7 +58,7 @@ def new_movement():
                         products_to_add.append(product)
                 db.session.add_all(products_to_add)
                 db.session.commit()
-                flash_msg = 'The products have been successfully added!'
+                flash_msg = '{0} {1}(s) have been added in the warehouse {2}!'.format(len(products_to_add), product.name, to_location)
         product_id = product.product_id
         movement = Movement(product_id=product_id, qty=qty, 
                         from_location=from_location,

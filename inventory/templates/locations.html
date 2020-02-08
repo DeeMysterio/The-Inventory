@@ -10,6 +10,7 @@
         <th>Id.</th>
         <th>Location</th>
         <th>Address</th>
+        <th>No. of products</th>
       </tr>
       {% for location in locations.items %}
       <tr>
@@ -18,7 +19,7 @@
           <a href="{{ url_for('locations.location', location_id = location.location_id)}}">{{ location.name }}</a>
         </td>
         <td>{{ location.address }}</td>
-
+        <td>{{ location.get_total_stock }}</td>
       </tr>
 
       {% endfor %}

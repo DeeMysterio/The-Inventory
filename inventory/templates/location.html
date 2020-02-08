@@ -24,6 +24,7 @@
         <p class="article-content"><strong>Id: </strong>{{ location.location_id }}</p>
         <p class="article-content"><strong>Name: </strong>{{ location.name }}</p>
         <Address class="article-content"><strong>Address:</strong> {{ location.address }}</Address>
+        <p class="article-content"><strong>Total Products: </strong>{{ location.get_total_stock }}</p>
     </div>
 </article>
 <!-- Modal -->
